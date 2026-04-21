@@ -1,0 +1,1050 @@
+{
+    "filePath": "1_rag_test.json",
+    "label": "Rag向量数据库示例",
+    "flow": {
+        "edges": [
+            {
+                "id": "vueflow__edge-#E82CEF3087end-#367D03D6A3start",
+                "source": "#E82CEF3087",
+                "target": "#367D03D6A3",
+                "sourceHandle": "end",
+                "targetHandle": "start",
+                "type": "pony"
+            },
+            {
+                "id": "vueflow__edge-#1A979F6074while-#E82CEF3087start",
+                "source": "#1A979F6074",
+                "target": "#E82CEF3087",
+                "sourceHandle": "while",
+                "targetHandle": "start",
+                "type": "pony"
+            },
+            {
+                "id": "vueflow__edge-#startend-#E51CB50EEEstart",
+                "source": "#start",
+                "target": "#E51CB50EEE",
+                "sourceHandle": "end",
+                "targetHandle": "start",
+                "type": "pony"
+            },
+            {
+                "id": "vueflow__edge-#E51CB50EEEend-#9D1C739DC5start",
+                "source": "#E51CB50EEE",
+                "target": "#9D1C739DC5",
+                "sourceHandle": "end",
+                "targetHandle": "start",
+                "type": "pony"
+            },
+            {
+                "id": "vueflow__edge-#2C4677C1ECwhile-#3A9381BFF1start",
+                "source": "#2C4677C1EC",
+                "target": "#3A9381BFF1",
+                "sourceHandle": "while",
+                "targetHandle": "start",
+                "type": "pony"
+            },
+            {
+                "id": "vueflow__edge-#3A9381BFF1end-#EF6CB40DF9start",
+                "source": "#3A9381BFF1",
+                "target": "#EF6CB40DF9",
+                "sourceHandle": "end",
+                "targetHandle": "start",
+                "type": "pony"
+            },
+            {
+                "id": "vueflow__edge-#EF6CB40DF9end-#C92D15998Fstart",
+                "source": "#EF6CB40DF9",
+                "target": "#C92D15998F",
+                "sourceHandle": "end",
+                "targetHandle": "start",
+                "type": "pony"
+            },
+            {
+                "id": "vueflow__edge-#9D1C739DC5end-#1A979F6074start",
+                "source": "#9D1C739DC5",
+                "target": "#1A979F6074",
+                "sourceHandle": "end",
+                "targetHandle": "start",
+                "type": "pony"
+            }
+        ],
+        "nodes": [
+            {
+                "id": "#start",
+                "type": "pony",
+                "data": {
+                    "label": "1.开始节点",
+                    "group": "FlowNode",
+                    "hasNext": true,
+                    "hasStart": false,
+                    "desc": "从此处开始运行",
+                    "type": "START",
+                    "subPath": [],
+                    "params": [],
+                    "returns": [],
+                    "content": {},
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": -17.625531544011892,
+                    "y": 1021.3107979851653,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#9D1C739DC5",
+                "type": "pony",
+                "data": {
+                    "label": "3.加载向量数据库",
+                    "group": "RAG",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "为大模型提供检索增强服务(基于python-sqlite3实现python原生轻量向量数据库)\n1.支持语义相似度匹配(使用余弦相似度)和数据标签\n2.支持使用内存缓存进行检索加速,支持1秒内10万级别数据检索",
+                    "type": "RAG_LOADER",
+                    "subPath": [],
+                    "params": [
+                        {
+                            "name": "gguf",
+                            "type": "GGUF",
+                            "desc": "选择词嵌入模型文件",
+                            "typeDef": "gguf",
+                            "value": "gguf/bge-large-zh-v1.5-f16.gguf",
+                            "path": [
+                                ".",
+                                "gguf",
+                                "gguf/bge-large-zh-v1.5-f16.gguf"
+                            ],
+                            "switch": "file",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        },
+                        {
+                            "name": "dbFile",
+                            "type": "db",
+                            "desc": "选择数据库文件(与dbPath二选一填写)",
+                            "typeDef": "db",
+                            "value": "",
+                            "path": [],
+                            "switch": "file",
+                            "selectList": [],
+                            "editable": false,
+                            "require": false
+                        },
+                        {
+                            "name": "dbPath",
+                            "type": "String",
+                            "desc": "保存数据库文件到(与dbFile二选一填写)",
+                            "typeDef": "String",
+                            "value": "rag_test.db",
+                            "path": [],
+                            "switch": "value",
+                            "selectList": [],
+                            "editable": false,
+                            "require": false
+                        },
+                        {
+                            "name": "cacheSize",
+                            "type": "Int",
+                            "desc": "允许使用的内存缓存大小Mb",
+                            "typeDef": "int",
+                            "value": 1024,
+                            "path": [],
+                            "switch": "number",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "rag",
+                            "type": "Rag",
+                            "desc": "",
+                            "typeDef": "string",
+                            "editable": false
+                        }
+                    ],
+                    "content": {},
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 1182.374468455988,
+                    "y": 1021.3107979851653,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#367D03D6A3",
+                "type": "pony",
+                "data": {
+                    "label": "6.向rag数据库中添加一条数据",
+                    "group": "RAG",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "向指定rag数据库中添加一条数据",
+                    "type": "RAG_ADD",
+                    "subPath": [],
+                    "params": [
+                        {
+                            "name": "rag",
+                            "type": "Rag",
+                            "desc": "请选择RAG_LOADER节点返回的RAG数据库",
+                            "typeDef": "rag",
+                            "value": "加载向量数据库.rag",
+                            "path": [
+                                "#9D1C739DC5",
+                                "rag"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        },
+                        {
+                            "name": "keyContent",
+                            "type": "String",
+                            "desc": "需要被向量化检索的内容(key值)",
+                            "typeDef": "string",
+                            "value": "标准输入输出.key",
+                            "path": [
+                                "#E82CEF3087",
+                                "key"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        },
+                        {
+                            "name": "content",
+                            "type": "String",
+                            "desc": "被保存的内容",
+                            "typeDef": "string",
+                            "value": "标准输入输出.content",
+                            "path": [
+                                "#E82CEF3087",
+                                "content"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        },
+                        {
+                            "name": "labels",
+                            "type": "List",
+                            "desc": "数据标签",
+                            "typeDef": "List<String>",
+                            "value": "标准输入输出.labels",
+                            "path": [
+                                "#E82CEF3087",
+                                "labels"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": false,
+                            "require": false
+                        }
+                    ],
+                    "returns": [],
+                    "content": {},
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 3079.876131545154,
+                    "y": 768.2707675870918,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#E82CEF3087",
+                "type": "pony",
+                "data": {
+                    "label": "标准输入输出5.",
+                    "group": "Operation",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "流程运行时的主要界面,功能如下\n1.当流程运行到此处时弹出标准输入输出界面\n2.可以在一定程度上自定义界面布局\n3.可以 展示/修改 流程中的参数,也可将用户输入定义为新的参数\n注:该节点将长期维护,添加更多实用功能(如表格,图表等)",
+                    "type": "STDIO",
+                    "subPath": [],
+                    "params": [
+                        {
+                            "name": "flag",
+                            "type": "Bool",
+                            "desc": "",
+                            "typeDef": "",
+                            "value": "参数定义.flag",
+                            "path": [
+                                "#E51CB50EEE",
+                                "flag"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": true,
+                            "require": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "key",
+                            "type": "String",
+                            "desc": "",
+                            "typeDef": "",
+                            "editable": true
+                        },
+                        {
+                            "name": "content",
+                            "type": "String",
+                            "desc": "",
+                            "typeDef": "",
+                            "editable": true
+                        },
+                        {
+                            "name": "labels",
+                            "type": "List",
+                            "desc": "",
+                            "typeDef": "",
+                            "editable": true
+                        }
+                    ],
+                    "content": {
+                        "controlModelList": [
+                            {
+                                "id": "#4B32812AC6",
+                                "type": "text",
+                                "name": "被向量化嵌入的句子",
+                                "icon": "Document",
+                                "value": "",
+                                "width": 2,
+                                "height": 1,
+                                "paramsType": "output",
+                                "paramsName": "key",
+                                "structs": null
+                            },
+                            {
+                                "id": "#D251CD777D",
+                                "type": "table",
+                                "name": "标签",
+                                "icon": "Grid",
+                                "value": [],
+                                "width": 1,
+                                "height": 3,
+                                "paramsType": "output",
+                                "paramsName": "labels",
+                                "structs": []
+                            },
+                            {
+                                "id": "#22DD830387",
+                                "type": "text",
+                                "name": "对应的文本内容",
+                                "icon": "Document",
+                                "value": "",
+                                "width": 2,
+                                "height": 2,
+                                "paramsType": "output",
+                                "paramsName": "content",
+                                "structs": null
+                            },
+                            {
+                                "id": "#29ACFBAC4F",
+                                "type": "booleans",
+                                "name": "是否继续添加",
+                                "icon": "Open",
+                                "value": true,
+                                "width": 3,
+                                "height": 1,
+                                "paramsType": "change",
+                                "paramsName": "flag",
+                                "structs": "Bool"
+                            }
+                        ]
+                    },
+                    "handles": [],
+                    "canAddParams": true,
+                    "canAddReturns": true,
+                    "locked": false,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 2479.876131545154,
+                    "y": 768.2707675870918,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#1A979F6074",
+                "type": "pony",
+                "data": {
+                    "label": "4.while循环",
+                    "group": "FlowNode",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "注:当循环执行完成后会继续执行与结束连接器相连的节点",
+                    "type": "FOR_WHILE",
+                    "subPath": [],
+                    "params": [
+                        {
+                            "name": "flag",
+                            "type": "Bool",
+                            "desc": "",
+                            "typeDef": "",
+                            "value": "参数定义.flag",
+                            "path": [
+                                "#E51CB50EEE",
+                                "flag"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": true,
+                            "require": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "count",
+                            "type": "Int",
+                            "desc": "当前循环次数",
+                            "typeDef": "Integer",
+                            "editable": false
+                        }
+                    ],
+                    "content": {
+                        "condition": "flag == True",
+                        "count": 0
+                    },
+                    "handles": [
+                        {
+                            "name": "while",
+                            "label": "while循环"
+                        }
+                    ],
+                    "canAddParams": true,
+                    "canAddReturns": false,
+                    "locked": true,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 1879.8761315451538,
+                    "y": 768.2707675870918,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#E51CB50EEE",
+                "type": "pony",
+                "data": {
+                    "label": "2.参数定义",
+                    "group": "FlowNode",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "每次运行到此处都会重新对变量进行初始化操作",
+                    "type": "PARAMS",
+                    "subPath": [],
+                    "params": [],
+                    "returns": [
+                        {
+                            "name": "flag",
+                            "type": "Bool",
+                            "desc": "",
+                            "typeDef": "",
+                            "editable": true
+                        }
+                    ],
+                    "content": {},
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": true,
+                    "locked": false,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 582.3744684559881,
+                    "y": 1021.3107979851653,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#2C4677C1EC",
+                "type": "pony",
+                "data": {
+                    "label": "7.while循环",
+                    "group": "FlowNode",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "注:当循环执行完成后会继续执行与结束连接器相连的节点",
+                    "type": "FOR_WHILE",
+                    "subPath": [],
+                    "params": [
+                        {
+                            "name": "flag",
+                            "type": "Bool",
+                            "desc": "",
+                            "typeDef": "",
+                            "value": "参数定义.flag",
+                            "path": [
+                                "#E51CB50EEE",
+                                "flag"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": true,
+                            "require": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "count",
+                            "type": "Int",
+                            "desc": "当前循环次数",
+                            "typeDef": "Integer",
+                            "editable": false
+                        }
+                    ],
+                    "content": {
+                        "condition": "flag == True",
+                        "count": 0
+                    },
+                    "handles": [
+                        {
+                            "name": "while",
+                            "label": "while循环"
+                        }
+                    ],
+                    "canAddParams": true,
+                    "canAddReturns": false,
+                    "locked": true,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 1894.516513277429,
+                    "y": 1625.1594883069777,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#C92D15998F",
+                "type": "pony",
+                "data": {
+                    "label": "10.标准输入输出",
+                    "group": "Operation",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "流程运行时的主要界面,功能如下\n1.当流程运行到此处时弹出标准输入输出界面\n2.可以在一定程度上自定义界面布局\n3.可以 展示/修改 流程中的参数,也可将用户输入定义为新的参数\n注:该节点将长期维护,添加更多实用功能(如表格,图表等)",
+                    "type": "STDIO",
+                    "subPath": [],
+                    "params": [
+                        {
+                            "name": "list",
+                            "type": "List",
+                            "desc": "",
+                            "typeDef": "",
+                            "value": "进行向量匹配查询.searchResult",
+                            "path": [
+                                "#EF6CB40DF9",
+                                "searchResult"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": true,
+                            "require": true
+                        }
+                    ],
+                    "returns": [],
+                    "content": {
+                        "controlModelList": [
+                            {
+                                "id": "#1F73EA4639",
+                                "type": "table",
+                                "name": "搜索结果",
+                                "icon": "Grid",
+                                "value": [],
+                                "width": 3,
+                                "height": 5,
+                                "paramsType": "input",
+                                "paramsName": "list",
+                                "structs": [
+                                    {
+                                        "id": "#80FE4AE1C2",
+                                        "label": "id",
+                                        "field": "id",
+                                        "editable": false,
+                                        "width": 25
+                                    },
+                                    {
+                                        "id": "#E539F0F568",
+                                        "label": "相似度",
+                                        "field": "similarity",
+                                        "editable": false,
+                                        "width": 25
+                                    },
+                                    {
+                                        "id": "#abcdef15",
+                                        "label": "内容",
+                                        "field": "content",
+                                        "editable": false,
+                                        "width": 80
+                                    },
+                                    {
+                                        "id": "#4295B64EA4",
+                                        "label": "标签",
+                                        "field": "labels",
+                                        "editable": false,
+                                        "width": 25
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "handles": [],
+                    "canAddParams": true,
+                    "canAddReturns": true,
+                    "locked": false,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 3692.878833141386,
+                    "y": 1625.1594883069777,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#3A9381BFF1",
+                "type": "pony",
+                "data": {
+                    "label": "8.标准输入输出",
+                    "group": "Operation",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "流程运行时的主要界面,功能如下\n1.当流程运行到此处时弹出标准输入输出界面\n2.可以在一定程度上自定义界面布局\n3.可以 展示/修改 流程中的参数,也可将用户输入定义为新的参数\n注:该节点将长期维护,添加更多实用功能(如表格,图表等)",
+                    "type": "STDIO",
+                    "subPath": [],
+                    "params": [
+                        {
+                            "name": "flag",
+                            "type": "Bool",
+                            "desc": "",
+                            "typeDef": "",
+                            "value": "参数定义.flag",
+                            "path": [
+                                "#E51CB50EEE",
+                                "flag"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": true,
+                            "require": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "key",
+                            "type": "String",
+                            "desc": "",
+                            "typeDef": "",
+                            "editable": true
+                        },
+                        {
+                            "name": "tagertLabel",
+                            "type": "List",
+                            "desc": "",
+                            "typeDef": "",
+                            "editable": true
+                        },
+                        {
+                            "name": "excludeLabel",
+                            "type": "List",
+                            "desc": "",
+                            "typeDef": "",
+                            "editable": true
+                        }
+                    ],
+                    "content": {
+                        "controlModelList": [
+                            {
+                                "id": "#4B32812AC6",
+                                "type": "text",
+                                "name": "模糊搜索关键句",
+                                "icon": "Document",
+                                "value": "",
+                                "width": 2,
+                                "height": 3,
+                                "paramsType": "output",
+                                "paramsName": "key",
+                                "structs": null
+                            },
+                            {
+                                "id": "#D251CD777D",
+                                "type": "table",
+                                "name": "搜索包含的标签",
+                                "icon": "Grid",
+                                "value": [],
+                                "width": 1,
+                                "height": 2,
+                                "paramsType": "output",
+                                "paramsName": "tagertLabel",
+                                "structs": []
+                            },
+                            {
+                                "id": "#D303EA417A",
+                                "type": "table",
+                                "name": "搜索排除的标签",
+                                "icon": "Grid",
+                                "value": [],
+                                "width": 1,
+                                "height": 2,
+                                "paramsType": "output",
+                                "paramsName": "excludeLabel",
+                                "structs": []
+                            },
+                            {
+                                "id": "#29ACFBAC4F",
+                                "type": "booleans",
+                                "name": "是否继续添加",
+                                "icon": "Open",
+                                "value": true,
+                                "width": 2,
+                                "height": 1,
+                                "paramsType": "change",
+                                "paramsName": "flag",
+                                "structs": "Bool"
+                            }
+                        ]
+                    },
+                    "handles": [],
+                    "canAddParams": true,
+                    "canAddReturns": true,
+                    "locked": false,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 2492.878833141386,
+                    "y": 1625.1594883069777,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#EF6CB40DF9",
+                "type": "pony",
+                "data": {
+                    "label": "9.进行向量匹配查询",
+                    "group": "RAG",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "从向量数据库中查询",
+                    "type": "RAG_SEARCH",
+                    "subPath": [],
+                    "params": [
+                        {
+                            "name": "rag",
+                            "type": "Rag",
+                            "desc": "请选择RAG_LOADER节点返回的RAG数据库",
+                            "typeDef": "rag",
+                            "value": "加载向量数据库.rag",
+                            "path": [
+                                "#9D1C739DC5",
+                                "rag"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        },
+                        {
+                            "name": "keyContent",
+                            "type": "String",
+                            "desc": "需要被向量化检索的内容(key值)",
+                            "typeDef": "string",
+                            "value": "标准输入输出.key",
+                            "path": [
+                                "#3A9381BFF1",
+                                "key"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        },
+                        {
+                            "name": "top_k",
+                            "type": "Int",
+                            "desc": "返回库中匹配的前top_k个内容",
+                            "typeDef": "int",
+                            "value": 10,
+                            "path": [],
+                            "switch": "number",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        },
+                        {
+                            "name": "top_p",
+                            "type": "Float",
+                            "desc": "返回库中余弦匹配相似度不低于top_p的数据",
+                            "typeDef": "float",
+                            "value": 0.3,
+                            "path": [],
+                            "switch": "float",
+                            "selectList": [],
+                            "editable": false,
+                            "require": true
+                        },
+                        {
+                            "name": "targetLabels",
+                            "type": "List",
+                            "desc": "检索包含上述所有标签的数据",
+                            "typeDef": "List<String>",
+                            "value": "标准输入输出.tagertLabel",
+                            "path": [
+                                "#3A9381BFF1",
+                                "tagertLabel"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": false,
+                            "require": false
+                        },
+                        {
+                            "name": "excludeLabels",
+                            "type": "List",
+                            "desc": "检索不包含上述任何一个标签的数据",
+                            "typeDef": "List<String>",
+                            "value": "标准输入输出.excludeLabel",
+                            "path": [
+                                "#3A9381BFF1",
+                                "excludeLabel"
+                            ],
+                            "switch": "path",
+                            "selectList": [],
+                            "editable": false,
+                            "require": false
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "searchResult",
+                            "type": "List",
+                            "desc": "检索结果",
+                            "typeDef": "list<{id:Long(数据自增id), similarity:Double(匹配相似度), content:String(内容), labels:List<String>(标签列表)}>",
+                            "editable": false
+                        }
+                    ],
+                    "content": {},
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": null
+                },
+                "initialized": false,
+                "position": {
+                    "x": 3092.878833141386,
+                    "y": 1625.1594883069777,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#4BEA1DD88C",
+                "type": "comment",
+                "data": {
+                    "label": "注释节点",
+                    "group": "Comment",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "注释节点",
+                    "type": "Comment",
+                    "subPath": [],
+                    "params": [],
+                    "returns": [],
+                    "content": {
+                        "desc": "3.上方流程为向向量数据库中插入数据的流程.请先插入数据再切换到下方的检索流程进行搜索"
+                    },
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": "path"
+                },
+                "initialized": false,
+                "position": {
+                    "x": 1873.4763547420234,
+                    "y": 559.9321085902637,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#3B6E946422",
+                "type": "comment",
+                "data": {
+                    "label": "注释节点",
+                    "group": "Comment",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "注释节点",
+                    "type": "Comment",
+                    "subPath": [],
+                    "params": [],
+                    "returns": [],
+                    "content": {
+                        "desc": "5.下方流程为从向量数据库中检索数据的流程\n将\"3.加载向量数据库\"节点到上方节点的连线删除并连接到下方\"7.while循环\"节点上开始检索流程"
+                    },
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": "path"
+                },
+                "initialized": false,
+                "position": {
+                    "x": 1887.56092913681,
+                    "y": 1407.4742783293739,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#36132C8D2F",
+                "type": "comment",
+                "data": {
+                    "label": "注释节点",
+                    "group": "Comment",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "注释节点",
+                    "type": "Comment",
+                    "subPath": [],
+                    "params": [],
+                    "returns": [],
+                    "content": {
+                        "desc": "2.此节点复制加载向量数据库并返回\"Rag\"向量数据库操作对象,后续可供多个节点使用\n该节点可以从已经保存的向量数据库\".db\"文件加载向量数据库,也可以给定文件保存路径新建数据库文件\n该节点需要选择一个\"词嵌入\"模型作为其向量化句子的工具,请下载支持\"整句向量化\"的\".gguf\"模型并放入到指定的\"models\"文件夹中(推荐bge-zh模型)"
+                    },
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": "path"
+                },
+                "initialized": false,
+                "position": {
+                    "x": 1177.0926206936203,
+                    "y": 731.1162379113564,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#B343EB7C7C",
+                "type": "comment",
+                "data": {
+                    "label": "注释节点",
+                    "group": "Comment",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "注释节点",
+                    "type": "Comment",
+                    "subPath": [],
+                    "params": [],
+                    "returns": [],
+                    "content": {
+                        "desc": "4.此节点调用\"Rag\"向量数据库操作对象向数据库中插入数据,需指定使用哪个操作对象\nkeyContent 与 content 分别为被词嵌入的句子与保存内容(一般简单处理 keyContent 与 content 相同)但是在一些场景中可能需要为保存的内容单独指定搜索关键句\nlabels 为标签列表,可以给内容打上标签"
+                    },
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": "path"
+                },
+                "initialized": false,
+                "position": {
+                    "x": 3075.8698634376415,
+                    "y": 467.7447019960256,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#1DD9AD3112",
+                "type": "comment",
+                "data": {
+                    "label": "注释节点",
+                    "group": "Comment",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "注释节点",
+                    "type": "Comment",
+                    "subPath": [],
+                    "params": [],
+                    "returns": [],
+                    "content": {
+                        "desc": "6.此节点调用\"Rag\"向量数据库操作对象检索其中的数据,需指定使用哪个操作对象\nkeyContent: 检索关键句,其会与数据库中存储数据的\"keyContent\"进行整句级别的余弦相似度匹配.并按照相似度从高到低排序返回结果\ntop_k: 返回匹配的数据中相似度最高的前top_k条数据\ntop_p: 余弦相似度小于top_p的结果将被过滤\ntop_k 与 top_p 在检索条件中为且的关系\ntargetLabels: 检索包含全部targetLabel标签的数据\nexcludelabels: 过滤包含任何一个excludelabels中标签的数据\n返回数据类型请查看节点详情中返回值searchResult的注释"
+                    },
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": "path"
+                },
+                "initialized": false,
+                "position": {
+                    "x": 3090.3195561579582,
+                    "y": 1161.1491470163303,
+                    "zoom": 0.5
+                }
+            },
+            {
+                "id": "#AD7D9807CF",
+                "type": "comment",
+                "data": {
+                    "label": "注释节点",
+                    "group": "Comment",
+                    "hasNext": true,
+                    "hasStart": true,
+                    "desc": "注释节点",
+                    "type": "Comment",
+                    "subPath": [],
+                    "params": [],
+                    "returns": [],
+                    "content": {
+                        "desc": "1.请注意: 目前参数定义节点定义的\"Bool\"类型变量默认值为\"True\", 暂不支持修改默认值"
+                    },
+                    "handles": [],
+                    "canAddParams": false,
+                    "canAddReturns": false,
+                    "locked": false,
+                    "switch": "path"
+                },
+                "initialized": false,
+                "position": {
+                    "x": 576.3167660849,
+                    "y": 804.4842924070585,
+                    "zoom": 0.5
+                }
+            }
+        ],
+        "viewport": {
+            "x": 91.50969248324657,
+            "y": -65.43015834639971,
+            "zoom": 0.402858861670356
+        }
+    },
+    "params": [],
+    "returns": []
+}
