@@ -6,11 +6,11 @@
 
 ### 项目门户地址 ( 包含前后端项目地址, 项目介绍与使用说明 )
 
-https://gitee.com/peach_pony/llm_flow_overview.git
+[pony800/llm_flow_overview: AI agent process building platform - overview](https://github.com/pony800/llm_flow_overview)
 
 ### 前端项目地址
 
-https://gitee.com/peach_pony/llm_flow_web.git
+[pony800/llm_flow_web: AI agent process building platform - web](https://github.com/pony800/llm_flow_web)
 
 ## 二.启动部署
 
